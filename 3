@@ -12,9 +12,17 @@ def get_inventory():
     apps_api_url = 'https://api.example.com/get_apps'  # Replace with your actual API endpoint for apps
     headers = {'Content-Type': 'application/json'}
 
+    # Unique payload for the apps API request
+    apps_payload = {
+        # Replace with your actual payload for the apps API
+        # Example:
+        # 'filter': {'status': 'active'},
+        # 'fields': ['appCode', 'name']
+    }
+
     try:
-        # Make GET request to fetch the list of apps
-        response = requests.get(apps_api_url, headers=headers)
+        # Make POST request to fetch the list of apps
+        response = requests.post(apps_api_url, json=apps_payload, headers=headers)
         response.raise_for_status()
         response_json = response.json()
     except requests.exceptions.RequestException as e:
@@ -36,11 +44,18 @@ def get_inventory():
     hosts_api_url = 'https://api.example.com/get_hosts'  # Replace with your actual API endpoint for hosts
 
     for app in apps:
-        # Prepare payload for POST request
-        payload = {'app': app}
+        # Unique payload for the hosts API request
+        hosts_payload = {
+            # Replace with your actual payload for the hosts API
+            # Example:
+            'appCode': app,
+            # 'environment': 'PROD',
+            # 'includeDetails': True
+        }
+
         try:
             # Make POST request to the API
-            response = requests.post(hosts_api_url, json=payload, headers=headers)
+            response = requests.post(hosts_api_url, json=hosts_payload, headers=headers)
             response.raise_for_status()
             response_json = response.json()
         except requests.exceptions.RequestException as e:
@@ -65,7 +80,7 @@ def get_inventory():
 
             # Optional: Add host variables
             # inventory['_meta']['hostvars'][fqdn] = {
-            #     'example_var': 'value'
+            #     'some_var': host.get('some_var')
             # }
 
     return inventory

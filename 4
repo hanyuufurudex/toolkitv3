@@ -1,14 +1,6 @@
-/**
-* @param {Event} event - Details about the user and the context in which they are logging in.
-* @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login transaction.
-*/
-exports.onExecutePostLogin = async (event, api) => {
-  // Use a unique namespace for your Archer application.
-  const namespace = 'https://archer.yourcompany.com/';
-
-  // Set all the required claims for the Archer SAML assertion.
-  // Auth0's normalized user profile has these attributes readily available.
-  api.idToken.setCustomClaim(`${namespace}email`, event.user.email);
-  api.idToken.setCustomClaim(`${namespace}firstName`, event.user.given_name);
-  api.idToken.setCustomClaim(`${namespace}lastName`, event.user.family_name);
-};
+{
+  "https://archer.yourcompany.com/email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
+  "https://archer.yourcompany.com/firstName": "FirstName",
+  "https://archer.yourcompany.com/lastName": "LastName",
+  "https://archer.yourcompany.com/email": "Email"
+}

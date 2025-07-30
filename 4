@@ -1,6 +1,12 @@
+exports.onExecutePostLogin = async (event, api) => {
+  const namespace = 'https://archer.yourcompany.com/';
+
+  // This line makes the user's email available for mapping.
+  api.idToken.setCustomClaim(`${namespace}email`, event.user.email);
+};
+
+
+
 {
-  "https://archer.yourcompany.com/email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier",
-  "https://archer.yourcompany.com/firstName": "FirstName",
-  "https://archer.yourcompany.com/lastName": "LastName",
-  "https://archer.yourcompany.com/email": "Email"
+  "https://archer.yourcompany.com/email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
 }

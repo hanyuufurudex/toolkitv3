@@ -1,14 +1,3 @@
-/**
-* @param {Event} event - Details about the user and the context in which they are logging in.
-* @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login transaction.
-*/
-exports.onExecutePostLogin = async (event, api) => {
-  // Use a descriptive namespace to avoid claim collisions.
-  // This can be any URI you control.
-  const namespace = 'https://archer.yourcompany.com/';
-
-  // Set the user's email as a custom claim in the ID and Access Tokens.
-  // The SAML addon will be able to read this claim.
-  api.idToken.setCustomClaim(`${namespace}email`, event.user.email);
-  api.accessToken.setCustomClaim(`${namespace}email`, event.user.email);
-};
+{
+  "https://archer.yourcompany.com/email": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+}
